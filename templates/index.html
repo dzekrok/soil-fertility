@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>TANIVASI — Analisis Kesuburan Tanah</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: #f4f7f6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2f6f4e;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+        .field {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        input {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        small {
+            color: #777;
+        }
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 14px;
+            background: #2f6f4e;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #245b40;
+        }
+        .result-box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #e8f5ef;
+            border-left: 6px solid #2f6f4e;
+            border-radius: 8px;
+        }
+        .footer-note {
+            margin-top: 40px;
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>TANIVASI</h1>
+    <div class="subtitle">
+        Sistem Analisis Kesuburan Tanah Berbasis Algoritma Machine Learning  
+        <br>Disclaimer: Prototype akademik, belum terverifikasi resmi!
+    </div>
+
+    <form method="POST">
+        <div class="form-grid">
+
+            <div class="field">
+                <label>Nitrogen (mg/kg)</label>
+                <input type="number" name="nitrogen" step="any" min="0" max="500" required>
+                <small>Rentang valid: 0 – 500 mg/kg</small>
+            </div>
+
+            <div class="field">
+                <label>Fosfor (mg/kg)</label>
+                <input type="number" name="phosphorus" step="any" min="0" max="1200" required>
+                <small>Rentang valid: 0 – 1200 mg/kg</small>
+            </div>
+
+            <div class="field">
+                <label>Kalium (mg/kg)</label>
+                <input type="number" name="kalium" step="any" min="0" max="1300" required>
+                <small>Rentang valid: 0 – 1300 mg/kg</small>
+            </div>
+
+            <div class="field">
+                <label>pH Tanah</label>
+                <input type="number" name="ph" step="0.1" min="0" max="10" required>
+                <small>Rentang valid: 0 – 10</small>
+            </div>
+
+            <div class="field">
+                <label>Kelembapan Tanah (%)</label>
+                <input type="number" name="moisture" step="any" min="0" max="100" required>
+                <small>Rentang valid: 0 – 100 %</small>
+            </div>
+
+        </div>
+
+        <button type="submit">Analisis Kesuburan Tanah</button>
+    </form>
+
+    {% if result %}
+    <div class="result-box">
+        <h3>Hasil Prediksi</h3>
+        <p><strong>Kategori Kesuburan:</strong> {{ result }}</p>
+        <p><strong>Rekomendasi:</strong> {{ recommendation }}</p>
+    </div>
+    {% endif %}
+
+    <div class="footer-note">
+        TANIVASI — Sistem cerdas untuk evaluasi kualitas tanah berbasis data dan AI
+    </div>
+</div>
+
+</body>
+</html>
